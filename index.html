@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard Beta v6.7</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #1f1c2c, #928dab);
+  color: white;
+  overflow: hidden;
+}
+
+/* Floating neon circles */
+.circle, .circle2 {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0,198,255,0.2);
+  animation: float 10s infinite alternate;
+}
+.circle { width: 200px; height: 200px; top: 10%; left: 10%; }
+.circle2 { width: 150px; height: 150px; bottom: 10%; right: 10%; background: rgba(0,114,255,0.2); }
+
+@keyframes float {
+  0% { transform: translateY(0) translateX(0);}
+  50% { transform: translateY(-30px) translateX(20px);}
+  100% { transform: translateY(0) translateX(0);}
+}
+
+/* Dashboard */
+#dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 0 40px rgba(0,0,0,0.3);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.5s ease;
+}
+
+#dashboard.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#errorMsg {
+  color: red;
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#errorMsg.visible {
+  opacity: 1;
+}
+
+/* Aktualizacja */
+#updating {
+  font-size: 16px;
+  color: #00c6ff;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#updating.visible {
+  opacity: 1;
+}
+
+/* Progress bar */
+#progressContainer {
+  width: 300px;
+  height: 20px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#progressContainer.visible {
+  opacity: 1;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: #00c6ff;
+  border-radius: 10px;
+  transition: width 0.1s linear;
+}
+
+/* Info button */
+#infoBtn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(0,198,255,0.3);
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: 0.3s, opacity 1s ease;
+  opacity: 0;
+}
+
+#infoBtn.visible {
+  opacity: 1;
+}
+
+#infoBtn:hover {
+  background: rgba(0,198,255,0.6);
+}
+
+/* Info text */
+#infoText {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #ff6666;
+  max-width: 400px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+#infoText.visible {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<div class="circle"></div>
+<div class="circle2"></div>
+
+<!-- Dashboard (beta) -->
+<div id="dashboard">
+  <h2>Dashboard (Beta)</h2>
+  <p>Ta funkcja jest obecnie niedostępna.</p>
+  <p id="errorMsg">Stop code: 067</p>
+  <p id="updating">v6.7 Aktualizowanie...</p>
+  <div id="progressContainer">
+    <div id="progressBar"></div>
+  </div>
+  <button id="infoBtn" onclick="toggleInfo()">Informacje o Error 067</button>
+  <p id="infoText">Error 067 jest spowodowany brakiem odpowiedniego skryptu lub błędami w systemie aktualizacji.</p>
+</div>
+
+<script>
+// Pokaż dashboard od razu
+const dash = document.getElementById('dashboard');
+dash.classList.add('active');
+
+// Fade in elementów
+setTimeout(() => document.getElementById('errorMsg').classList.add('visible'), 500);
+setTimeout(() => document.getElementById('updating').classList.add('visible'), 1000);
+setTimeout(() => document.getElementById('progressContainer').classList.add('visible'), 1200);
+setTimeout(() => document.getElementById('infoBtn').classList.add('visible'), 1500);
+
+// Progress bar animacja
+const progressBar = document.getElementById('progressBar');
+let width = 0;
+const interval = setInterval(() => {
+  width += 1;
+  progressBar.style.width = width + "%";
+  if (width >= 100) {
+    clearInterval(interval);
+    document.getElementById('updating').textContent = "Brak nowych aktualizacji";
+    console.log("Error Six-Seven");
+  }
+}, 100);
+
+// Funkcja toggle dla info
+function toggleInfo() {
+  const infoText = document.getElementById('infoText');
+  infoText.classList.toggle('visible');
+}
+</script>
+
+</body>
+</html>
