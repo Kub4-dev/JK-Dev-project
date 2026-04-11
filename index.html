@@ -138,6 +138,25 @@ body {
 #infoText.visible {
   opacity: 1;
 }
+
+/* JK-LINKS BUTTON */
+#jkBtn {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(90deg, #00d0ff, #008cff);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(0,200,255,0.5);
+  transition: 0.3s;
+}
+
+#jkBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(0,200,255,0.8);
+}
 </style>
 </head>
 <body>
@@ -156,6 +175,11 @@ body {
   </div>
   <button id="infoBtn" onclick="toggleInfo()">Informacje o Error 067</button>
   <p id="infoText">Error 067 jest spowodowany brakiem odpowiedniego skryptu lub błędami w systemie aktualizacji.</p>
+
+  <!-- 🔥 NOWY GUZIK JK-LINKS -->
+  <button id="jkBtn" onclick="window.location.href='https://kub4-dev.github.io/JK-Links/'">
+    Wejdź na JK‑Links
+  </button>
 </div>
 
 <script>
